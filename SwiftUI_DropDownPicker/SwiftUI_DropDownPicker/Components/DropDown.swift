@@ -17,8 +17,8 @@ struct DropDown: View {
         GeometryReader {
             let size = $0.size
             
-            VStack(spacing: 0) {
-                ForEach(content) { title in
+            VStack(alignment: .leading, spacing: 0) {
+                ForEach(content, id: \.self) { title in
                     RowView(title, size)
                 }
             }
@@ -28,6 +28,9 @@ struct DropDown: View {
     
     @ViewBuilder
     func RowView(_ title: String, _ size: CGSize) -> some View {
-        
+        Text(title)
+            .font(.title3)
+            .fontWeight(.semibold)
+            .padding(.horizontal)
     }
 }
