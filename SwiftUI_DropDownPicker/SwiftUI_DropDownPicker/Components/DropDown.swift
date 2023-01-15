@@ -22,8 +22,20 @@ struct DropDown: View {
                     RowView(title, size)
                 }
             }
+            .background {
+                Rectangle()
+                    .fill(inActiveTint)
+            }
         }
         .frame(height: 55)
+        .overlay(alignment: .trailing) {
+            Image(systemName: "chevron.up.chevron.down")
+                .padding(.trailing, 10)
+        }
+        .mask(alignment: .top) {
+            Rectangle()
+                .frame(height: expendView ? CGFloat(content.count) * 55 : 55)
+        }
     }
     
     @ViewBuilder
@@ -32,5 +44,18 @@ struct DropDown: View {
             .font(.title3)
             .fontWeight(.semibold)
             .padding(.horizontal)
+            .frame(width: size.width, height: size.height, alignment: .leading)
+            .background {
+                if selection == title {
+                    Rectangle()
+                        .fill(activeTint)
+                }
+            }
+            .contentShape(Rectangle())
+            .onTapGesture {
+                withAnimation(.interactiveSpring(response: 0.6, dampingFraction: 0.7, blendDuration: 0.7)) {
+                    expendView.toggle()
+                }
+            }
     }
 }
