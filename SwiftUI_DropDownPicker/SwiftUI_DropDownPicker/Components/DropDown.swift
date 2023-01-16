@@ -26,6 +26,8 @@ struct DropDown: View {
                 Rectangle()
                     .fill(inActiveTint)
             }
+            /// Moving View Based on the Selection
+            .offset(y: (CGFloat(content.firstIndex(of: selection) ?? 0) * -55))
         }
         .frame(height: 55)
         .overlay(alignment: .trailing) {
@@ -35,6 +37,8 @@ struct DropDown: View {
         .mask(alignment: .top) {
             Rectangle()
                 .frame(height: expendView ? CGFloat(content.count) * 55 : 55)
+            /// Moving the Mask Based on the Selection, so that Every Content Will be Visible
+                .offset(y: expendView ? (CGFloat(content.firstIndex(of: selection) ?? 0) * -55) : 0)
         }
     }
     
@@ -54,7 +58,13 @@ struct DropDown: View {
             .contentShape(Rectangle())
             .onTapGesture {
                 withAnimation(.interactiveSpring(response: 0.6, dampingFraction: 0.7, blendDuration: 0.7)) {
-                    expendView.toggle()
+                    /// If Expended then Make Selection
+                    if expendView {
+                        selection = title
+                        expendView = false
+                    } else {
+                        expendView = true
+                    }
                 }
             }
     }
