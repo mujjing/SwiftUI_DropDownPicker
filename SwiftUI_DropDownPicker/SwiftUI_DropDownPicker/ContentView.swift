@@ -12,11 +12,12 @@ struct ContentView: View {
                 content: ["Easy", "Normal", "Hard", "Expert"],
                 activeTint: .primary.opacity(0.1),
                 inActiveTint: .white.opacity(0.05),
+                dynamic: false,
                 selection: $selection
             )
             .frame(width: 130)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .environment(\.colorScheme, .dark)
         .background {
             Color("BG")
