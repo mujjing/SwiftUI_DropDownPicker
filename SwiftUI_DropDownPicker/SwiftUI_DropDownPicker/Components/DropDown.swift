@@ -53,6 +53,7 @@ struct DropDown: View {
                 if selection == title {
                     Rectangle()
                         .fill(activeTint)
+                        .transition(.identity)
                 }
             }
             .contentShape(Rectangle())
@@ -63,7 +64,10 @@ struct DropDown: View {
                         selection = title
                         expendView = false
                     } else {
-                        expendView = true
+                        /// Disabling Outside Taps
+                        if selection == title {
+                            expendView = true
+                        }
                     }
                 }
             }
